@@ -1,2 +1,3 @@
 "# Keylogger" 
-"# keylogger" 
+
+*For educational purposes only*
